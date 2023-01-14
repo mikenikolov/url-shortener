@@ -1,7 +1,9 @@
 package com.example.urlshortener.exception.handler;
 
+import com.example.urlshortener.exception.RedirectException;
 import com.example.urlshortener.exception.RegistrationException;
 import com.example.urlshortener.exception.AuthenticationException;
+import com.example.urlshortener.exception.TakenCustomUrlException;
 import com.example.urlshortener.exception.entity.ExceptionResponse;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
@@ -28,13 +30,22 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 
-    @ExceptionHandler(value = RegistrationException.class)
-    public ResponseEntity<Object> handleRegException(Exception ex) {
+    @ExceptionHandler(value = {RegistrationException.class, TakenCustomUrlException.class})
+    public ResponseEntity<Object> handleDefaultConflictException(Exception ex) {
         ExceptionResponse response = new ExceptionResponse()
                 .setStatus(HttpStatus.CONFLICT.value())
                 .setDateTime(LocalDateTime.now())
                 .setErrors(List.of(ex.getMessage()));
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(value = RedirectException.class)
+    public ResponseEntity<Object> handleRedirectException(Exception ex) {
+        ExceptionResponse response = new ExceptionResponse()
+                .setStatus(HttpStatus.NOT_FOUND.value())
+                .setDateTime(LocalDateTime.now())
+                .setErrors(List.of(ex.getMessage()));
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
     @Override
