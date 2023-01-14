@@ -34,7 +34,6 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    @ResponseStatus(HttpStatus.CREATED)
     public JwtResponseDto login(@RequestBody @Valid AccountRequestDto requestDto)
             throws AuthenticationException {
         authService.login(requestDto.getUsername(), requestDto.getPassword());
