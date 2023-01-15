@@ -27,8 +27,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .antMatchers("/register", "/login")
                             .permitAll()
-                        .anyRequest()
+                        .antMatchers("/short/**")
                             .authenticated()
+                        .anyRequest()
+                            .permitAll()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
