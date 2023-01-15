@@ -18,11 +18,11 @@ public class RedirectController {
     private final UrlRepository urlRepository;
 
     @GetMapping("/{shortUrl}")
-    public Object redirect(@PathVariable String shortUrl, HttpServletResponse response) throws IOException {
+    public void redirect(@PathVariable String shortUrl, HttpServletResponse response) throws IOException {
         Optional<Url> urlFromDb = urlRepository.findByShortUrl(shortUrl);
-        if (urlFromDb.isPresent()) {
-            response.sendRedirect(urlFromDb.get().getOriginalUrl());
+        if (urlFromDb.isEmpty()) {
+            throw new RedirectException("This url is not exists");
         }
-        throw new RedirectException("This url is not exists");
+        response.sendRedirect(urlFromDb.get().getOriginalUrl());
     }
 }
