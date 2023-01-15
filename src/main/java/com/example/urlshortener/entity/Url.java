@@ -25,7 +25,9 @@ public class Url {
             sequenceName = "urls_id_seq",
             allocationSize = 1)
     private Long id;
+    @Column(name = "original_url")
     private String originalUrl;
+    @Column(name = "short_url")
     private String shortUrl;
     @Column(name = "account_id")
     private Long accountId;
