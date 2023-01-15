@@ -5,10 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotNull;
+
 @Data
 @Accessors(chain = true)
 public class UrlRequestDto {
     @CheckUrl
+    @NotNull(message = "original_url field cannot be empty")
     @JsonProperty("original_url")
     private String originalUrl;
 }

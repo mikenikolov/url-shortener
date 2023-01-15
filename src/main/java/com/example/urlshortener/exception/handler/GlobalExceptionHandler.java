@@ -59,7 +59,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.toList());
         ExceptionResponse response = new ExceptionResponse()
-                .setStatus(HttpStatus.UNAUTHORIZED.value())
+                .setStatus(HttpStatus.BAD_REQUEST.value())
                 .setDateTime(LocalDateTime.now())
                 .setErrors(errors);
         return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
