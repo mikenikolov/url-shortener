@@ -7,41 +7,38 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.web.filter.GenericFilterBean;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
 @AllArgsConstructor
-public class JwtFilter extends GenericFilterBean {
+public class JwtFilter extends OncePerRequestFilter {
     private JwtProvider provider;
     private ObjectMapper objectMapper;
 
     @Override
-    public void doFilter(ServletRequest servletRequest,
-                         ServletResponse servletResponse,
-                         FilterChain filterChain) throws IOException {
+    protected void doFilterInternal(HttpServletRequest req, HttpServletResponse resp, FilterChain filterChain) throws IOException {
         try {
-            String jwt = provider.parse((HttpServletRequest) servletRequest);
+            String jwt = provider.parse(req);
             if (jwt != null && provider.validate(jwt)) {
                 Authentication auth = provider.getAuthentication(jwt);
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
-            filterChain.doFilter(servletRequest, servletResponse);
+            filterChain.doFilter(req, resp);
 
         } catch (Exception ex) {
-            ExceptionResponse response = new ExceptionResponse()
+            ExceptionResponse exceptionResponse = new ExceptionResponse()
                     .setStatus(HttpStatus.UNAUTHORIZED.value())
                     .setDateTime(LocalDateTime.now())
                     .setErrors(List.of(ex.getMessage()));
-            servletResponse.setContentType("application/json");
-            servletResponse.getWriter().write(objectMapper.writeValueAsString(response));
+            resp.setContentType("application/json");
+            resp.getWriter().write(objectMapper.writeValueAsString(exceptionResponse));
         }
     }
 }
