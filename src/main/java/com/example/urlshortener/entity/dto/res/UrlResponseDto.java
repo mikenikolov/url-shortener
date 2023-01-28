@@ -16,5 +16,5 @@ public class UrlResponseDto {
     private String shortUrl;
     @JsonProperty("timestamp")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime localDateTime;
+    private LocalDateTime timestamp;
 }

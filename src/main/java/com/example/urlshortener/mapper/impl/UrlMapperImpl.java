@@ -6,8 +6,6 @@ import com.example.urlshortener.mapper.UrlMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-
 @Component
 public class UrlMapperImpl implements UrlMapper {
     @Value("${domain-name}")
@@ -16,7 +14,7 @@ public class UrlMapperImpl implements UrlMapper {
     @Override
     public UrlResponseDto toDto(Url url) {
         return new UrlResponseDto()
-                .setLocalDateTime(LocalDateTime.now())
+                .setTimestamp(url.getTimestamp())
                 .setShortUrl(domainName + "/" + url.getShortUrl())
                 .setOriginalUrl(url.getOriginalUrl());
     }

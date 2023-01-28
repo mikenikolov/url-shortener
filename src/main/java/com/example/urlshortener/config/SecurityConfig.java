@@ -27,7 +27,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .antMatchers("/register", "/login")
                             .permitAll()
-                        .antMatchers("/short/**")
+                        .antMatchers("/short/**", "/profile/**")
                             .authenticated()
                         .anyRequest()
                             .permitAll()

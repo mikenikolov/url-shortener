@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -31,6 +32,9 @@ public class Url {
     private String shortUrl;
     @Column(name = "account_id")
     private Long accountId;
+
+    @Column(name = "timestamp")
+    private LocalDateTime timestamp;
 
     @Override
     public boolean equals(Object o) {

@@ -7,3 +7,5 @@ databaseChangeLog:
       file: db/changelog/changes/create-urls-seq.sql
   - include:
       file: db/changelog/changes/create-urls-table.sql
+  - include:
+      file: db/changelog/changes/add-url-timestamp.sql

@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -25,6 +26,7 @@ public class UrlShortenerServiceImpl implements UrlShortenerService {
                 .getAuthentication()
                 .getPrincipal();
         Url resultUrl = new Url()
+                .setTimestamp(LocalDateTime.now())
                 .setOriginalUrl(originalUrl)
                 .setShortUrl(shortUrl)
                 .setAccountId(user.getId());
@@ -41,6 +43,7 @@ public class UrlShortenerServiceImpl implements UrlShortenerService {
             throw new TakenCustomUrlException("This custom url is already taken. Try another one.");
         }
         Url resultUrl = new Url()
+                .setTimestamp(LocalDateTime.now())
                 .setOriginalUrl(originalUrl)
                 .setShortUrl(customUrl)
                 .setAccountId(user.getId());

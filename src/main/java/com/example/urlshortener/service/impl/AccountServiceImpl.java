@@ -1,6 +1,7 @@
 package com.example.urlshortener.service.impl;
 
 import com.example.urlshortener.entity.Account;
+import com.example.urlshortener.entity.dto.res.AccountInfoResponseDto;
 import com.example.urlshortener.respository.AccountRepository;
 import com.example.urlshortener.service.AccountService;
 import lombok.AllArgsConstructor;
@@ -21,5 +22,10 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account save(Account account) {
         return accountRepository.save(account);
+    }
+
+    @Override
+    public AccountInfoResponseDto findAccountInfoById(Long id) {
+        return accountRepository.findAccountInfoById(id);
     }
 }
