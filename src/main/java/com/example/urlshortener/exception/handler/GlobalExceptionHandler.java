@@ -39,8 +39,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(value = IllegalArgumentException.class)
+    public ResponseEntity<Object> handleDefaultBadRequestException(Exception ex) {
+        ExceptionResponse response = new ExceptionResponse()
+                .setStatus(HttpStatus.BAD_REQUEST.value())
+                .setDateTime(LocalDateTime.now())
+                .setErrors(List.of(ex.getMessage()));
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(value = RedirectException.class)
-    public ResponseEntity<Object> handleRedirectException(Exception ex) {
+    public ResponseEntity<Object> handleDefaultNotFoundException(Exception ex) {
         ExceptionResponse response = new ExceptionResponse()
                 .setStatus(HttpStatus.NOT_FOUND.value())
                 .setDateTime(LocalDateTime.now())

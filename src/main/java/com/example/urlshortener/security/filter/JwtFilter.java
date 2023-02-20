@@ -23,7 +23,9 @@ public class JwtFilter extends OncePerRequestFilter {
     private ObjectMapper objectMapper;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest req, HttpServletResponse resp, FilterChain filterChain) throws IOException {
+    protected void doFilterInternal(HttpServletRequest req,
+                                    HttpServletResponse resp,
+                                    FilterChain filterChain) throws IOException {
         try {
             String jwt = provider.parse(req);
             if (jwt != null && provider.validate(jwt)) {
@@ -38,6 +40,7 @@ public class JwtFilter extends OncePerRequestFilter {
                     .setDateTime(LocalDateTime.now())
                     .setErrors(List.of(ex.getMessage()));
             resp.setContentType("application/json");
+            resp.setStatus(HttpStatus.UNAUTHORIZED.value());
             resp.getWriter().write(objectMapper.writeValueAsString(exceptionResponse));
         }
     }
