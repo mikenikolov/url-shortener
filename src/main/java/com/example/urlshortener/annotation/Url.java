@@ -12,8 +12,8 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = UrlValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface CheckUrl {
-    String message() default "Invalid url";
+public @interface Url {
+    String message() default "Invalid url format";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

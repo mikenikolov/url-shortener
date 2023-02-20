@@ -1,5 +1,6 @@
 package com.example.urlshortener.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,6 +10,7 @@ import java.util.Collection;
 
 @Getter
 @Setter
+@EqualsAndHashCode(callSuper = true)
 public class AuthUser extends User {
     private Long id;
 
