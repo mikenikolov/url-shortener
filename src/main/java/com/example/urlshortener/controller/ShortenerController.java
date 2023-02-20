@@ -1,7 +1,7 @@
 package com.example.urlshortener.controller;
 
 
-import com.example.urlshortener.entity.AuthUser;
+import com.example.urlshortener.security.AuthUser;
 import com.example.urlshortener.entity.Url;
 import com.example.urlshortener.entity.dto.req.CustomUrlRequestDto;
 import com.example.urlshortener.entity.dto.req.UrlRequestDto;

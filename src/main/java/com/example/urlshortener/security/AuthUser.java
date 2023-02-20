@@ -1,4 +1,4 @@
-package com.example.urlshortener.entity;
+package com.example.urlshortener.security;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

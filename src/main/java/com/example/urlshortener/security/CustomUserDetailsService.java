@@ -1,7 +1,6 @@
 package com.example.urlshortener.security;
 
 import com.example.urlshortener.entity.Account;
-import com.example.urlshortener.entity.AuthUser;
 import com.example.urlshortener.service.AccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
