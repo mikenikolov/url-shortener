@@ -3,7 +3,7 @@ package com.example.urlshortener.service;
 import com.example.urlshortener.entity.Url;
 
 public interface UrlShortenerService {
-    Url shortUrl(String originalUrl);
+    Url shortUrl(String originalUrl, Long accountId);
 
-    Url shortUrl(String originalUrl, String customUrl);
+    Url shortUrl(String originalUrl, String customUrl, Long accountId);
 }
