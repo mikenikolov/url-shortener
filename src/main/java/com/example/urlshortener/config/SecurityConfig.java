@@ -24,9 +24,7 @@ public class SecurityConfig {
                 .logout().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/register", "/login")
-                            .permitAll()
+                .authorizeHttpRequests(requests -> requests
                         .antMatchers("/short/**", "/profile/**")
                             .authenticated()
                         .anyRequest()
