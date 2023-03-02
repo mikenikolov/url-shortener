@@ -14,7 +14,11 @@ import java.util.Collection;
 public class AuthUser extends User {
     private Long id;
 
-    public AuthUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public AuthUser(Long id,
+                    String username,
+                    String password,
+                    Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
+        this.id = id;
     }
 }
