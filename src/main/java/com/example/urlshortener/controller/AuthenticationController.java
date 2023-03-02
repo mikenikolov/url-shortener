@@ -6,7 +6,7 @@ import com.example.urlshortener.entity.dto.res.AccountResponseDto;
 import com.example.urlshortener.entity.dto.res.JwtResponseDto;
 import com.example.urlshortener.exception.AuthenticationException;
 import com.example.urlshortener.exception.RegistrationException;
-import com.example.urlshortener.mapper.AccountMapper;
+import com.example.urlshortener.mapper.Mapper;
 import com.example.urlshortener.security.filter.JwtProvider;
 import com.example.urlshortener.service.AuthenticationService;
 import lombok.AllArgsConstructor;
@@ -23,14 +23,14 @@ import javax.validation.Valid;
 public class AuthenticationController {
     private JwtProvider provider;
     private AuthenticationService authService;
-    private AccountMapper accountMapper;
+    private Mapper<Account, AccountResponseDto> accountMapper;
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public AccountResponseDto register(@RequestBody @Valid AccountRequestDto requestDto)
             throws RegistrationException {
         Account account = authService.register(requestDto.getUsername(), requestDto.getPassword());
-        return accountMapper.toDto(account);
+        return accountMapper.map(account);
     }
 
     @PostMapping("/login")

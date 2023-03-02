@@ -36,7 +36,9 @@ public class Account {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return Objects.equals(id, account.id) && Objects.equals(username, account.username) && Objects.equals(password, account.password);
+        return Objects.equals(id, account.id)
+                && Objects.equals(username, account.username)
+                && Objects.equals(password, account.password);
     }
 
     @Override

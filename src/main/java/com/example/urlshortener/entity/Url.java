@@ -41,7 +41,8 @@ public class Url {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Url url = (Url) o;
-        return Objects.equals(id, url.id) && Objects.equals(originalUrl, url.originalUrl)
+        return Objects.equals(id, url.id)
+                && Objects.equals(originalUrl, url.originalUrl)
                 && Objects.equals(shortUrl, url.shortUrl)
                 && Objects.equals(accountId, url.accountId);
     }

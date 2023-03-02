@@ -1,12 +1,11 @@
 package com.example.urlshortener.controller;
 
-
+import com.example.urlshortener.mapper.Mapper;
 import com.example.urlshortener.security.AuthUser;
 import com.example.urlshortener.entity.Url;
 import com.example.urlshortener.entity.dto.req.CustomUrlRequestDto;
 import com.example.urlshortener.entity.dto.req.UrlRequestDto;
 import com.example.urlshortener.entity.dto.res.UrlResponseDto;
-import com.example.urlshortener.mapper.UrlMapper;
 import com.example.urlshortener.service.UrlShortenerService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,19 +21,19 @@ import javax.validation.Valid;
 @AllArgsConstructor
 public class ShortenerController {
     private UrlShortenerService shortenerService;
-    private UrlMapper urlMapper;
+    private Mapper<Url, UrlResponseDto> urlMapper;
 
     @PostMapping
     public UrlResponseDto shortUrl(@Valid @RequestBody UrlRequestDto requestDto,
                                    @AuthenticationPrincipal AuthUser auth) {
         Url shortUrl = shortenerService.shortUrl(requestDto.getOriginalUrl(), auth.getId());
-        return urlMapper.toDto(shortUrl);
+        return urlMapper.map(shortUrl);
     }
 
     @PostMapping("/custom")
     public UrlResponseDto shortCustomUrl(@Valid @RequestBody CustomUrlRequestDto requestDto,
                                          @AuthenticationPrincipal AuthUser auth) {
         Url shortUrl = shortenerService.shortUrl(requestDto.getOriginalUrl(), requestDto.getShortUrl(), auth.getId());
-        return urlMapper.toDto(shortUrl);
+        return urlMapper.map(shortUrl);
     }
 }
