@@ -13,6 +13,6 @@ public class AccountInfoResponseDto {
     private Long id;
     @JsonProperty("username")
     private String username;
-    @JsonProperty("count_of_urls")
-    private Long countOfUrls;
+    @JsonProperty("number_of_urls")
+    private Long numberOfUrls;
 }

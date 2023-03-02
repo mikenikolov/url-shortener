@@ -1,6 +1,6 @@
-package com.example.urlshortener.annotation;
+package com.example.urlshortener.annotation.constraint;
 
-import com.example.urlshortener.annotation.constraint.CustomUrlValidator;
+import com.example.urlshortener.annotation.constraint.impl.CustomUrlValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CustomUrl {
-    String message() default "Custom url contains not valid symbols";
+    String message() default "custom url contains not valid symbols";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

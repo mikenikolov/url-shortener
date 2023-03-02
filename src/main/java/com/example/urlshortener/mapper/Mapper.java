@@ -1,0 +1,5 @@
+package com.example.urlshortener.mapper;
+
+public interface Mapper<T, R> {
+    R map(T t);
+}

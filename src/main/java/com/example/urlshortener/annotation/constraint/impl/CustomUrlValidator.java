@@ -1,6 +1,6 @@
-package com.example.urlshortener.annotation.constraint;
+package com.example.urlshortener.annotation.constraint.impl;
 
-import com.example.urlshortener.annotation.CustomUrl;
+import com.example.urlshortener.annotation.constraint.CustomUrl;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.validation.ConstraintValidator;

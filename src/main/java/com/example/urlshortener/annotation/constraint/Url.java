@@ -1,6 +1,6 @@
-package com.example.urlshortener.annotation;
+package com.example.urlshortener.annotation.constraint;
 
-import com.example.urlshortener.annotation.constraint.UrlValidator;
+import com.example.urlshortener.annotation.constraint.impl.UrlValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Url {
-    String message() default "Invalid url format";
+    String message() default "invalid url format";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
