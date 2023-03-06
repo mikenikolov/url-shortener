@@ -9,6 +9,7 @@ import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -71,6 +72,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .setStatus(HttpStatus.BAD_REQUEST.value())
                 .setDateTime(LocalDateTime.now())
                 .setErrors(errors);
+        return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
+                                                                  HttpHeaders headers,
+                                                                  HttpStatus status,
+                                                                  WebRequest request) {
+        ExceptionResponse response = new ExceptionResponse()
+                .setStatus(HttpStatus.BAD_REQUEST.value())
+                .setDateTime(LocalDateTime.now())
+                .setErrors(List.of("can't resolve request because of input arguments"));
         return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
     }
 }
