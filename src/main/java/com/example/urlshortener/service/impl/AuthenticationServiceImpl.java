@@ -18,7 +18,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public Account register(String username, String password) throws RegistrationException {
+    public Account register(String username, String password) {
         Optional<Account> accountFromDb = accountService.findByUsername(username);
         if (accountFromDb.isPresent()) {
             throw new RegistrationException("Username '" + username + "' already taken");
@@ -30,7 +30,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public Account login(String username, String password) throws AuthenticationException {
+    public Account login(String username, String password) {
         Optional<Account> account = accountService.findByUsername(username);
         if (account.isPresent() && passwordEncoder.matches(password, account.get().getPassword())) {
             return account.get();

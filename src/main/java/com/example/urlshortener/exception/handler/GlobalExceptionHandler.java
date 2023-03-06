@@ -1,5 +1,6 @@
 package com.example.urlshortener.exception.handler;
 
+import com.example.urlshortener.exception.DisallowedCustomUrl;
 import com.example.urlshortener.exception.RedirectException;
 import com.example.urlshortener.exception.RegistrationException;
 import com.example.urlshortener.exception.AuthenticationException;
@@ -40,7 +41,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler(value = IllegalArgumentException.class)
+    @ExceptionHandler(value = {IllegalArgumentException.class, DisallowedCustomUrl.class})
     public ResponseEntity<Object> handleDefaultBadRequestException(Exception ex) {
         ExceptionResponse response = new ExceptionResponse()
                 .setStatus(HttpStatus.BAD_REQUEST.value())
