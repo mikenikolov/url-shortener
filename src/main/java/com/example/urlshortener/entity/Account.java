@@ -8,10 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -28,8 +26,6 @@ public class Account {
     private Long id;
     private String username;
     private String password;
-    @OneToMany(mappedBy = "accountId")
-    private List<Url> urls;
 
     @Override
     public boolean equals(Object o) {

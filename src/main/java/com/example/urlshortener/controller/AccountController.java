@@ -31,14 +31,14 @@ public class AccountController {
 
     @GetMapping
     public AccountInfoResponseDto getAccountInfo(@AuthenticationPrincipal AuthUser authUser) {
-        return accountService.findAccountInfoById(authUser.getId());
+        return accountService.getAccountInfo(authUser.getAccount());
     }
 
     @GetMapping("/urls")
     public AccountUrlsResponseDto getAccountUrls(@AuthenticationPrincipal AuthUser authUser,
                                                  @RequestParam(value = "page", defaultValue = "1") Integer page) {
         Pageable pageable = PageRequest.of(page - 1, urlsPerPage, Sort.by(Sort.Direction.DESC, "timestamp"));
-        Page<Url> pages = urlService.getPageableUrlsByAccount(authUser.getId(), pageable);
+        Page<Url> pages = urlService.getPageableUrlsByAccount(authUser.getAccount(), pageable);
         return urlsMapper.map(pages);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.urlshortener.service.impl;
 
+import com.example.urlshortener.entity.Account;
 import com.example.urlshortener.entity.Url;
 import com.example.urlshortener.respository.UrlRepository;
 import com.example.urlshortener.service.UrlService;
@@ -14,7 +15,7 @@ public class UrlServiceImpl implements UrlService {
     private UrlRepository urlRepository;
 
     @Override
-    public Page<Url> getPageableUrlsByAccount(Long id, Pageable pageable) {
-        return urlRepository.findAllByAccountId(id, pageable);
+    public Page<Url> getPageableUrlsByAccount(Account account, Pageable pageable) {
+        return urlRepository.findAllByAccount(account, pageable);
     }
 }

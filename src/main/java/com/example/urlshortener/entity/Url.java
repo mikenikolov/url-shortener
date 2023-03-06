@@ -6,9 +6,12 @@ import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
@@ -30,25 +33,26 @@ public class Url {
     private String originalUrl;
     @Column(name = "short_url")
     private String shortUrl;
-    @Column(name = "account_id")
-    private Long accountId;
-
     @Column(name = "timestamp")
     private LocalDateTime timestamp;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Url)) return false;
         Url url = (Url) o;
         return Objects.equals(id, url.id)
                 && Objects.equals(originalUrl, url.originalUrl)
                 && Objects.equals(shortUrl, url.shortUrl)
-                && Objects.equals(accountId, url.accountId);
+                && Objects.equals(timestamp, url.timestamp)
+                && Objects.equals(account, url.account);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, originalUrl, shortUrl, accountId);
+        return Objects.hash(id, originalUrl, shortUrl, timestamp, account);
     }
 }

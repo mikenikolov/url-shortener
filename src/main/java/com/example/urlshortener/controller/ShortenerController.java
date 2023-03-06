@@ -26,14 +26,14 @@ public class ShortenerController {
     @PostMapping
     public UrlResponseDto shortUrl(@Validated(DefaultSeq.class) @RequestBody UrlRequestDto requestDto,
                                    @AuthenticationPrincipal AuthUser auth) {
-        Url shortUrl = shortenerService.shortUrl(requestDto.getOriginalUrl(), auth.getId());
+        Url shortUrl = shortenerService.shortUrl(requestDto.getOriginalUrl(), auth.getAccount());
         return urlMapper.map(shortUrl);
     }
 
     @PostMapping("/custom")
     public UrlResponseDto shortCustomUrl(@Validated(DefaultSeq.class) @RequestBody CustomUrlRequestDto requestDto,
                                          @AuthenticationPrincipal AuthUser auth) {
-        Url shortUrl = shortenerService.shortUrl(requestDto.getOriginalUrl(), requestDto.getShortUrl(), auth.getId());
+        Url shortUrl = shortenerService.shortUrl(requestDto.getOriginalUrl(), requestDto.getShortUrl(), auth.getAccount());
         return urlMapper.map(shortUrl);
     }
 }

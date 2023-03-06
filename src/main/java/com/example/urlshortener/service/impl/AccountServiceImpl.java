@@ -25,7 +25,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountInfoResponseDto findAccountInfoById(Long id) {
-        return accountRepository.findAccountInfoById(id);
+    public AccountInfoResponseDto getAccountInfo(Account account) {
+        return accountRepository.getAccountInfo(account);
     }
 }

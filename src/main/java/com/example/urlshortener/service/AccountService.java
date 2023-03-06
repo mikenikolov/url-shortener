@@ -10,5 +10,5 @@ public interface AccountService {
 
     Account save(Account account);
 
-    AccountInfoResponseDto findAccountInfoById(Long id);
+    AccountInfoResponseDto getAccountInfo(Account account);
 }

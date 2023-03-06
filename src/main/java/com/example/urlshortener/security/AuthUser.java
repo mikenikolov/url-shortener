@@ -1,5 +1,6 @@
 package com.example.urlshortener.security;
 
+import com.example.urlshortener.entity.Account;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,13 +13,13 @@ import java.util.Collection;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 public class AuthUser extends User {
-    private Long id;
+    private transient Account account;
 
-    public AuthUser(Long id,
+    public AuthUser(Account account,
                     String username,
                     String password,
                     Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
-        this.id = id;
+        this.account = account;
     }
 }
