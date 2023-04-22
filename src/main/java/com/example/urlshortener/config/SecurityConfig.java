@@ -25,7 +25,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests(requests -> requests
-                        .antMatchers("/short/**", "/profile/**")
+                        .antMatchers("/v1/short/**", "/v1/profile/**")
                             .authenticated()
                         .anyRequest()
                             .permitAll()

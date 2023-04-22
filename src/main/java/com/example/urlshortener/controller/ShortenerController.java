@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/short")
+@RequestMapping("/v1/short")
 @AllArgsConstructor
 public class ShortenerController {
     private UrlShortenerService shortenerService;

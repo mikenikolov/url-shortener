@@ -23,21 +23,18 @@ class AccountUrlsMapperImpl implements Mapper<Page<Url>, AccountUrlsResponseDto>
         List<UrlResponseDto> urlsDto = pages.stream()
                 .map(urlMapper::map)
                 .collect(Collectors.toList());
-        int pageNum;
-        if (pages.getNumber() >= pages.getTotalPages()) {
-            pageNum = pages.getTotalPages();
-        } else {
-            pageNum = pages.getNumber() + 1;
-        }
+        String endpoint = domainName + "/profile/urls?page=";
+        int totalPages = pages.isEmpty() ? 1 : pages.getTotalPages();
+        int currPage = pages.getNumber() + 1;
+        int nextPage = pages.hasNext() ? currPage + 1 : currPage;
+        int prevPage = pages.isFirst() ? 1 : currPage - 1;
         return new AccountUrlsResponseDto()
                 .setUrls(urlsDto)
-                .setCurrentPage(pageNum)
-                .setTotalPages(pages.getTotalPages())
-                .setNextPage(domainName + "/profile/urls?page="
-                        + (pages.hasNext() ? pageNum + 1 : pageNum))
-                .setPreviousPage(domainName + "/profile/urls?page="
-                        + (pages.hasPrevious() ? pageNum - 1 : pageNum))
-                .setIsLastPage(!pages.hasNext());
+                .setCurrentPage(currPage)
+                .setTotalPages(totalPages)
+                .setNextPage(endpoint + nextPage)
+                .setPreviousPage(endpoint + prevPage)
+                .setIsLastPage(pages.isLast());
     }
 }
 
